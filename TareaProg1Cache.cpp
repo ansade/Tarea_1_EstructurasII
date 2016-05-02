@@ -1,8 +1,10 @@
-/* Andres Sanchez Delgado
-   B05832
-   ansanc7@gmail.com 88140943
+/*
+  TAREA 1 ESTRUCTURAS DE COMPUTADORAS II IE0503
+   Elaborado por : Eduardo Mesen y  Andres Sanchez 
+  */
+  
 
-   $   ./mi_cache   <asociatividad>   <tamaño   del   caché>   <tamaño   del bloque>
+/*   $   ./mi_cache   <asociatividad>   <tamaño   del   caché>   <tamaño   del bloque>
    Compilar en linux con g++: g++ TP1_CMESEN.cpp -o cache
    Archivo Necesario: prueba.txt
    Ejecutar en el bash: ./cache 0 256 32  
@@ -69,7 +71,7 @@ int main(int argc, char *argv[]){
 
 //Valida que la cantidad de parámetros ingresados al programa sea la necesaria
 	if(argc!=4){
-  	cout << "\nError! debe ingresar 3 parámetros...\n" << endl;
+  	//cout << "\nError! debe ingresar 3 parámetros...\n" << endl;
     return -1;
    }
 	else{//1
@@ -90,7 +92,7 @@ int main(int argc, char *argv[]){
 				Filas = NumBloques;
 				Columnas = 2;
 				TamIndice = log(NumBloques)/log(2);
-				cout << "BytesIndex:" << TamIndice << "\n" << endl;
+		//		cout << "BytesIndex:" << TamIndice << "\n" << endl;
 			}
 			break; 
 			case(1):{
@@ -112,20 +114,20 @@ int main(int argc, char *argv[]){
     }//2
 
 		if(TipoCache == "No implementado. Error!."){
-			cout << "\nCache de tipo: " << TipoCache << "\n" << endl;
+			//cout << "\nCache de tipo: " << TipoCache << "\n" << endl;
   		exit(-2);
 			}
 		else{//3
-			cout << "\nCache de tipo: " << TipoCache << endl;
-			cout << "Bloques en la Cache: " << NumBloques << endl;
-			cout << "ByteOffset: " << ByteOffset << endl;
+			//cout << "\nCache de tipo: " << TipoCache << endl;
+			//cout << "Bloques en la Cache: " << NumBloques << endl;
+			//cout << "ByteOffset: " << ByteOffset << endl;
 
 			TamTag=LongPalabra-(TamIndice+ByteOffset);
     
 			//Define la estructura de datos de la cache.
 			//Es una matriz de longitud NumBloques X Sets + bit de válido 
 			unsigned long Cache[Filas][Columnas]; 
-			cout << "\nMatriz de: " << Filas << "X" << Columnas << "\n" << endl;
+			//cout << "\nMatriz de: " << Filas << "X" << Columnas << "\n" << endl;
 				
 			//Setea el valor del bit de válido en cero, cache vacia.
 			for(int i=0;i<Filas;i++){
@@ -133,24 +135,24 @@ int main(int argc, char *argv[]){
 					Cache[i][j] = 0;
 			}
 
-			cout << "'Cache Vacia:'\n"<< endl;
+			//cout << "'Cache Vacia:'\n"<< endl;
 			for(int i=0;i<Filas;i++){
 				for(int j=0;j<Columnas;j++){
-					cout << Cache[i][j] << " ";
+				//	cout << Cache[i][j] << " ";
 				}
-					cout << endl;
+				//	cout << endl;
 			}
 
   		//Apertura del archivo para su lectura
-			archivo.open("prueba1.txt",ifstream::in);
+			archivo.open("aligned.trace",ifstream::in);
 
   		//Verifica que el archivo se haya abierto correctamente
 			if (archivo.fail()){
-				cout << "\nError al abrir el archivo\n" << endl;
+				//cout << "\nError al abrir el archivo\n" << endl;
 				return -3;
 			}
 			else{//4
-				cout << "\nArchivo abierto con éxito\n" << endl;
+				//cout << "\nArchivo abierto con éxito\n" << endl;
 
       int indice0 = 0;
 			int indice1 = 0;
@@ -166,21 +168,21 @@ int main(int argc, char *argv[]){
 				//Obtiene la línea de lectura/escritura
 				archivo.getline(LecturaEscritura,LongCad,'\n');
 
-				cout << "Dirección: " << Direccion << endl;
-				cout << "Acción: " << LecturaEscritura << endl;
+				//cout << "Dirección: " << Direccion << endl;
+				//cout << "Acción: " << LecturaEscritura << endl;
 
 				//Convierte la dirección en hexadecimal a binario
 				
 				sBits_direccion = HexStringABinString (Direccion);
 						
-				cout << "Direccion binaria: " << sBits_direccion << endl;
+				//cout << "Direccion binaria: " << sBits_direccion << endl;
 
 				//Separa la dirección en Tag, Index y Offset
 				BinStringAMultipleString (sBits_direccion, TamIndice, TamTag, ByteOffset);
 
-				cout << "Tag: " << sBits_tag << endl;
-				cout << "Index: " << sBits_index << endl;
-				cout << "Offset: " << sBits_byte_offset << endl;
+				//cout << "Tag: " << sBits_tag << endl;
+				//cout << "Index: " << sBits_index << endl;
+				//cout << "Offset: " << sBits_byte_offset << endl;
 
     		/*----------------------------------------------------------------------
  				*  Conversion de bits a decimal index, BO y tag
@@ -194,9 +196,9 @@ int main(int argc, char *argv[]){
 		   	// Convierte el string que contiene  los bits del offset a un numero decimal.
 				decimal_byte_offset = bitset<numeric_limits<unsigned long>::digits>(sBits_byte_offset).to_ulong();
 		
-				cout << "Decimal Tag: " << decimal_tag << endl;
-				cout << "Decimal Index: " << decimal_index << endl;
-				cout << "Decimal Offset: " << decimal_byte_offset << endl;
+				//cout << "Decimal Tag: " << decimal_tag << endl;
+				//cout << "Decimal Index: " << decimal_index << endl;
+				//cout << "Decimal Offset: " << decimal_byte_offset << endl;
 
 				//Define si se hace una escritura o lectura comparando esa bandera
 				for(int i=0;i<LongCad-1;i++){			
@@ -206,7 +208,7 @@ int main(int argc, char *argv[]){
 
 		  	if(LE != 0){//1
 					//Escritura de la cache
-					cout << "'Escritura a la cache'\n"<< endl; 
+					//cout << "'Escritura a la cache'\n"<< endl; 
 					switch(Asociatividad){	
     				case(0):{//Cache de mapeo directo
 							if(Cache[decimal_index][0] == 0){
@@ -230,15 +232,15 @@ int main(int argc, char *argv[]){
 						break;
 						case(1):{
 							int EnCache = 0;
-							cout << "cache de 4 set-asociativo" << endl;
+						//	cout << "cache de 4 set-asociativo" << endl;
 							for(int i=0;i<4;i++){
 								if(Cache[decimal_index][i] == 1 & Cache[decimal_index][i+4] == decimal_tag){
 									EnCache = 1;
-									cout << "Esta en la cache" << endl;
+							//		cout << "Esta en la cache" << endl;
 								}
 							}
-							cout << "Indice0:" << indice0 << endl;
-							cout << "Indice1:" << indice1 << endl;
+							//cout << "Indice0:" << indice0 << endl;
+							//cout << "Indice1:" << indice1 << endl;
 							if(!EnCache){//No esta en la cache, lo va a escribir
 								misses++;																		
 								if(decimal_index == 0){//Si el indice es 0									
@@ -247,13 +249,13 @@ int main(int argc, char *argv[]){
 										Cache[decimal_index][indice0] = 1; 
 										Cache[decimal_index][indice0+4] = decimal_tag; 
 										indice0++;												
-										cout << "No esta en la cache, indice 0" << endl;
+								//		cout << "No esta en la cache, indice 0" << endl;
 									}	
 									else{
 										Cache[decimal_index][indice0] = 1; 
 										Cache[decimal_index][indice0+4] = decimal_tag; 
 										indice0++;													
-										cout << "No esta en la cache, indice i" << endl;
+									//	cout << "No esta en la cache, indice i" << endl;
 									}	
 								}
 								else	if(decimal_index == 1){//Si el indice es 1 
@@ -262,13 +264,13 @@ int main(int argc, char *argv[]){
 													Cache[decimal_index][indice1] = 1; 
 													Cache[decimal_index][indice1+4] = decimal_tag; 
 													indice1++;												
-													cout << "No esta en la cache, indice0" << endl;
+										//			cout << "No esta en la cache, indice0" << endl;
 											  	}	
 												else{
 											 		Cache[decimal_index][indice1] = 1; 
 													Cache[decimal_index][indice1+4] = decimal_tag; 
 													indice1++;													
-													cout << "No esta en la cache,indicei" << endl;
+											//		cout << "No esta en la cache,indicei" << endl;
 												}
 											}			
 							 				else{//Entonces no hay set vacios, asignelo por random
@@ -276,12 +278,12 @@ int main(int argc, char *argv[]){
 												int aleatorio = rand() % 4;
              						Cache[decimal_index][aleatorio] = 1; 
 												Cache[decimal_index][aleatorio+4] = decimal_tag; 											
-												cout << "No esta en la cache,reemplazo" << endl;	
+												//cout << "No esta en la cache,reemplazo" << endl;	
 								 		 }
 							}
 							else{
 								hits++;
-								cout << "Esta en la cache" << endl;
+							//	cout << "Esta en la cache" << endl;
 							}
 						}
 						break;
@@ -290,23 +292,23 @@ int main(int argc, char *argv[]){
 						 	if(Cache[decimal_index][0] == 1 & Cache[decimal_index][2] == decimal_tag ){//hay dato válido en seti, se compara etiqueta
 								//El dato ya esta en la cache
 								hits++;	
-								cout << "esta en la cache" << endl;							
+								//cout << "esta en la cache" << endl;							
 							}
 							else if(Cache[decimal_index][1] == 1 & Cache[decimal_index][3] == decimal_tag){//hay dato válido y etiqueta en seti, se 
 											hits++;
-											cout << "esta en la cache" << endl;							
+									//		cout << "esta en la cache" << endl;							
 										}
 									 else if(Cache[decimal_index][0] == 0){
 									 				Cache[decimal_index][0] = 1; 
 													Cache[decimal_index][2] = decimal_tag; 											
 											    misses++;	
-													cout << "No esta en la cache" << endl;
+										//			cout << "No esta en la cache" << endl;
 												}
 												else if(Cache[decimal_index][1] == 0){
 									 						Cache[decimal_index][1] = 1; 
 															Cache[decimal_index][3] = decimal_tag; 											
 											    		misses++;	
-															cout << "No esta en la cache" << endl;	
+											//				cout << "No esta en la cache" << endl;	
 												}
 														 else{
 													 	 	srand(time(NULL));
@@ -314,18 +316,19 @@ int main(int argc, char *argv[]){
                	     			 	 	Cache[decimal_index][aleatorio] = 1; 
 													   	Cache[decimal_index][aleatorio+2] = decimal_tag; 											
 											     	 	misses++;	
-													 		cout << "No esta en la cache, reemplazo" << endl;	
+												//	 		cout << "No esta en la cache, reemplazo" << endl;	
 															}	
 		        	}
 							break;
 							default:
-								cout << "No esta en la cache" << endl;
+								//cout << "No esta en la cache" << endl;
+								;
 					}
 				}
 
 					//Lectura de La cache
 				else{
-					cout << "'Lectura a la cache'\n"<< endl;
+					//cout << "'Lectura a la cache'\n"<< endl;
 					switch(Asociatividad){	
    					case(0):{//Directamente mapeado
 							if(Cache[decimal_index][0] == 0){//Si el bit de válido esta en 1, el dato en cache
@@ -345,7 +348,7 @@ int main(int argc, char *argv[]){
 						}
 						break;
 						case(1):{//Asociativo de 4 vias
-							cout << "Asociativo de 4 vias" << endl;
+						//	cout << "Asociativo de 4 vias" << endl;
 							int EnCache = 0;
 							for(int i=0;i<4;i++){
 								if(Cache[decimal_index][i] == 1){//hay dato válido en seti(tiene 4 sets o vías), se compara etiqueta
@@ -355,11 +358,11 @@ int main(int argc, char *argv[]){
 							}
 							if(EnCache){
 								hits++;
-								cout << "esta en la cache" << endl;
+							//	cout << "esta en la cache" << endl;
 								}		
 							else{//No esta en la cache										
 								misses++;	
-								cout << "No esta en la cache" << endl;	
+							//	cout << "No esta en la cache" << endl;	
 							}	
 						}
 						break;
@@ -367,34 +370,35 @@ int main(int argc, char *argv[]){
 							cout << "Asociativo de 2 vias" << endl;
 							if(Cache[decimal_index][0] == 1 & Cache[decimal_index][2] == decimal_tag){//hay dato válido y etqueta en seti
 								hits++;
-								cout << "Esta en la cache" << endl;
+								//cout << "Esta en la cache" << endl;
 							}
 							else if(Cache[decimal_index][1] == 1 & Cache[decimal_index][3] == decimal_tag){//hay dato válido y etqueta en seti
 										hits++;
-										cout << "Esta en la cache" << endl;
+									//	cout << "Esta en la cache" << endl;
 										}
 									 else{
-										 cout << "No esta en la cache" << endl;
+										// cout << "No esta en la cache" << endl;
 										 misses++;
 									 }
 						}
 						break;
 						default:	
-							cout << "No es un dato válido" << endl;
+							//cout << "No es un dato válido" << endl;
+							;
 					}
 				}
 		
-				cout << "'Estado de la Cache:'\n"<< endl;
+		//		cout << "'Estado de la Cache:'\n"<< endl;
 		
 				for(int i=0;i<Filas;i++){
 					for(int j=0;j<Columnas;j++){
-						cout << Cache[i][j] << " ";
+			//			cout << Cache[i][j] << " ";
 					}
-						cout << endl;
+			//			cout << endl;
 				}			
 		
-				cout << "\nHit:" << hits << endl;
-				cout << "Miss:" << misses << "\n" << endl;
+			//	cout << "\nHit:" << hits << endl;
+			//	cout << "Miss:" << misses << "\n" << endl;
 				/*HitRatio = 100.0*(double(hits)/double(Cont));
 				MissRatio = 100.0*(double(misses)/double(Cont));
 				cout << "\nDatos Analizados:" << Cont << endl;
